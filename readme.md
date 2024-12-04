@@ -19,7 +19,7 @@ https://drive.google.com/file/d/1uea1MB2D8J8lyGyiItUnDr70PsvKLdOo/view?usp=shari
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/midul9797/document-manegement-service.git
+git clone https://github.com/midul9797/document-management-service.git
 cd document-management-service
 ```
 
