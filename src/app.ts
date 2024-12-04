@@ -11,9 +11,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(
   cors({
     // origin: 'https://shohojogi.vercel.app',
-    origin: 'http://localhost:3000',
+    origin: '*',
     credentials: true,
-  }),
+  })
 );
 app.use(cookieParser());
 app.use(express.json());

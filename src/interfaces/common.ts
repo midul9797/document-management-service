@@ -13,3 +13,6 @@ export type IGenericResponse<T> = {
   };
   data: T;
 };
+export type IRequestUser = {
+  userId: string;
+};

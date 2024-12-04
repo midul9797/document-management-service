@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import config from './config';
 import { Server } from 'http';
 import app from './app';
+import { RedisClient } from './shared/redis';
 let server: Server;
 process.on('uncaughtException', error => {
   console.log(error);
@@ -12,6 +13,7 @@ async function boostrap() {
   try {
     await mongoose.connect(config.database_url as string);
     console.log('DB connected');
+    await RedisClient.connect();
     server = app.listen(config.port, () => {
       console.log(config.port);
     });
