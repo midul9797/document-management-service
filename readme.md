@@ -42,6 +42,7 @@ yarn install
 npm start
 # or
 yarn start
+```
 
 ## Project Structure
 
