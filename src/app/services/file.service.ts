@@ -5,28 +5,36 @@ import { IFile } from '../interfaces/file.interface';
 import { File } from '../models/file.model';
 import { RedisClient } from '../../shared/redis';
 
+// Function to upload a file to the database
 const uploadFileInDB = async (payload: IFile): Promise<IFile | null> => {
   const createdFile = await File.create(payload);
   if (!createdFile)
     throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to upload file');
   return createdFile;
 };
+
+// Function to download a file from the database
 const downloadFileFromDB = async (fileId: string): Promise<IFile | null> => {
   const result = await File.findOne({ _id: fileId });
   if (!result) throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to download');
   return result;
 };
 
+// Function to get a file from the database
 const getFileFromDB = async (fileId: string): Promise<IFile | null> => {
   const file = await File.findOne({ _id: fileId });
   if (!file) throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to get file');
   return file;
 };
+
+// Function to get all files from the database for a given user
 const getFilesFromDB = async (userId: string): Promise<IFile[] | null> => {
   const files = await File.find({ 'author.id': userId });
   if (!files) throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to get files');
   return files;
 };
+
+// Function to share a file in the database
 const shareFileInDB = async (
   fileId: string,
   email: string,
@@ -35,6 +43,7 @@ const shareFileInDB = async (
   const file = await File.findOne({ _id: fileId });
   if (!file) throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to find file');
 
+  // Update access permissions for the file
   if (file.accessPermissions !== undefined) {
     types.map(type => {
       if (
@@ -51,6 +60,7 @@ const shareFileInDB = async (
   return file;
 };
 
+// Function to get all shared files from the database for a given email
 const getSharedFilesFromDB = async (email: string): Promise<IFile[] | null> => {
   const files = await File.find({
     $or: [
@@ -65,6 +75,7 @@ const getSharedFilesFromDB = async (email: string): Promise<IFile[] | null> => {
   return files;
 };
 
+// Function to update a file in the database
 const updateFileInDB = async (
   payload: Partial<IFile>,
   fileId: string,
@@ -82,6 +93,7 @@ const updateFileInDB = async (
   return 'File updated successfully';
 };
 
+// Function to delete a file from the database
 const deleteFileFromDB = async (fileId: string): Promise<IFile | null> => {
   const result = await File.findOneAndDelete({ _id: fileId });
   if (!result) throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to delete');

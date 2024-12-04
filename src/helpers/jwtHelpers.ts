@@ -1,16 +1,10 @@
-import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
-const createToken = (
-  payload: Record<string, unknown>,
-  secret: Secret,
-  expireTime: string,
-): string => {
-  return jwt.sign(payload, secret, { expiresIn: expireTime });
-};
+// Function to decode a JWT token
 const decodeToken = (token: string): JwtPayload => {
   return jwt.decode(token) as JwtPayload;
 };
+// Export the function for use in other modules
 export const jwtHelpers = {
-  createToken,
   decodeToken,
 };

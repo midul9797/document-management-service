@@ -1,4 +1,4 @@
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 
 export type IFile = {
   _id?: string; // id of the file is optional because initially there will be no id.

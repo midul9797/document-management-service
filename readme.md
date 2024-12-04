@@ -1,8 +1,47 @@
 # Document Management Service
 
-This repository contains the backend implementation for a Document Management Service. Below is the detailed project structure.
+This repository contains the backend implementation for a Document Management Service
 
 ---
+
+## Explanation Video:
+
+https://drive.google.com/file/d/1uea1MB2D8J8lyGyiItUnDr70PsvKLdOo/view?usp=sharing
+
+## Prerequisites
+
+- Node.js (version 20 or later)
+- npm or yarn
+- Redis(Port: 6379)
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/midul9797/document-manegement-service.git
+cd document-management-service
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Environment Variables
+
+1. Rename `envfile.example` to `.env`
+2. It contains the required environment variables
+
+### 4. Start Server
+
+```bash
+npm start
+# or
+yarn start
 
 ## Project Structure
 
@@ -78,10 +117,12 @@ The File Management API provides endpoints to manage files, including uploading,
 ## **Base URL**
 
 ```
-{{baseUrl}}
+
+{{baseUrl}} = http://localhost:4002/api/v1
+
 ```
 
-Replace `{{baseUrl}}` with your server's URL (e.g., `http://localhost:4002/api/v1`).
+
 
 ---
 
@@ -90,8 +131,10 @@ Replace `{{baseUrl}}` with your server's URL (e.g., `http://localhost:4002/api/v
 All endpoints require an `Authorization` header with a JWT token:
 
 ```
+
 Authorization: <your-token>
-```
+
+````
 
 ---
 
@@ -117,7 +160,7 @@ Uploads a file to the server.
   "type": "application/pdf",
   "data": "base64 binary string"
 }
-```
+````
 
 **Response Example:**
 

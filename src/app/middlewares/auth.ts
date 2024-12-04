@@ -3,9 +3,9 @@ import { NextFunction, Response, Request } from 'express';
 import ApiError from '../../errors/ApiError';
 import httpStatus from 'http-status';
 import { jwtHelpers } from '../../helpers/jwtHelpers';
-import { Secret } from 'jsonwebtoken';
-import config from '../../config';
+import { ClerkTokenPayload } from '../../interfaces/common';
 
+// Middleware function for authentication
 const auth = () => async (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization;
@@ -14,7 +14,7 @@ const auth = () => async (req: Request, res: Response, next: NextFunction) => {
     }
     let verifiedUser = null;
 
-    verifiedUser = jwtHelpers.decodeToken(token);
+    verifiedUser = jwtHelpers.decodeToken(token) as ClerkTokenPayload;
     req.user = verifiedUser;
     next();
   } catch (error) {
