@@ -28,6 +28,7 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.879.0",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
@@ -49,6 +50,7 @@
     "jsonwebtoken": "^9.0.2",
     "lint-staged": "^15.2.10",
     "mongoose": "^8.8.2",
+    "node-cron": "^4.2.1",
     "prettier": "^3.3.3",
     "redis": "^4.7.0",
     "ts-node-dev": "^2.0.0",

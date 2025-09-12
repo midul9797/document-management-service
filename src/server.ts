@@ -4,6 +4,7 @@ import config from './config';
 import { Server } from 'http';
 import app from './app';
 import { RedisClient } from './shared/redis';
+import { startCronJobs } from './cron';
 
 // Global server instance
 let server: Server;
@@ -23,7 +24,7 @@ async function boostrap() {
 
     // Connect to Redis
     await RedisClient.connect();
-
+    startCronJobs();
     // Start Express server
     server = app.listen(config.port, () => {
       console.log(config.port);

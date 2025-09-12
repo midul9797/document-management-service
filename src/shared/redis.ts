@@ -28,20 +28,25 @@ const connect = async (): Promise<void> => {
 };
 
 // Function to set file metadata cache
-const setFileCache = async (userId: string, data: string): Promise<void> => {
-  const key = `fileMetaData:${userId}`;
+const setDocumentMetadataCache = async (
+  userId: string,
+  data: string,
+): Promise<void> => {
+  const key = `documentMetaData:${userId}`;
   await redisClient.set(key, data, { EX: Number(config.redis.expires_in) });
 };
 
 // Function to get file metadata cache
-const getFileCache = async (userId: string): Promise<string | null> => {
-  const key = `fileMetaData:${userId}`;
+const getDocumentMetadataCache = async (
+  userId: string,
+): Promise<string | null> => {
+  const key = `documentMetaData:${userId}`;
   return JSON.parse((await redisClient.get(key)) as string);
 };
 
 // Function to delete file metadata cache
-const delFileCache = async (userId: string): Promise<void> => {
-  const key = `fileMetaData:${userId}`;
+const delDocumentMetadataCache = async (userId: string): Promise<void> => {
+  const key = `documentMetaData:${userId}`;
   await redisClient.del(key);
 };
 
@@ -55,9 +60,9 @@ const disconnect = async (): Promise<void> => {
 // Export the Redis client with its methods
 export const RedisClient = {
   connect,
-  setFileCache,
-  getFileCache,
-  delFileCache,
+  setDocumentMetadataCache,
+  getDocumentMetadataCache,
+  delDocumentMetadataCache,
   disconnect,
   publish: redisPubClient.publish.bind(redisPubClient),
   subscribe: redisSubClient.subscribe.bind(redisSubClient),

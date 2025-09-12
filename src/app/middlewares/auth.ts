@@ -7,8 +7,13 @@ import { ClerkTokenPayload } from '../../interfaces/common';
 
 // Middleware function for authentication
 const auth = () => async (req: Request, res: Response, next: NextFunction) => {
+  if (req.method === 'OPTIONS') {
+    next();
+    return;
+  }
   try {
     const token = req.headers.authorization;
+
     if (!token) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
     }
